@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'ManiDevops21/capstone-project:v1'
+      image ''abhishekf5/maven-abhishek-docker-agent:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "ManiDevops21/capstone-project:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "abhishekf5/maven-abhishek-docker-agent:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "Edureka_Capstone_Project/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
