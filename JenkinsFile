@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
-        sh 'cd /var/lib/jenkins/workspace/capstone-project/src && mvn clean package'
+        sh 'cd /usr/share/maven && mvn clean package'
       }
     }
     stage('Static Code Analysis') {
