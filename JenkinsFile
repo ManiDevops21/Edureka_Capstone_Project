@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'ManiDevops21/Capstone_Project:v1'
+      image 'ManiDevops21/Capstone-CICD:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://34.201.116.83:9000"
+        SONAR_URL = "http://54.144.235.115:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "abhishekf5/ultimate-cicd:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "ManiDevops21/Capstone-CICD:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "Edureka_Capstone_Project/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
