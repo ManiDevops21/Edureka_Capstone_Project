@@ -28,13 +28,13 @@ pipeline {
       environment {
         DOCKER_IMAGE = "manidevops21/addressbook-webapp:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "cd /var/lib/jenkins/workspace/capstone-project /Dockerfile"
-      REGISTRY_CREDENTIALS = credentials('dockerhub')
+      REGISTRY_CREDENTIALS = credentials('Manidevops21/****** (dockerhub)')
       }
       steps {
         script {
             sh 'cd /var/lib/jenkins/workspace/capstone-project && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://registry.hub.docker.com', "dockerhub") {
+            docker.withRegistry('https://registry.hub.docker.com', "Manidevops21/****** (dockerhub)") {
                 dockerImage.push()
             }
         }
