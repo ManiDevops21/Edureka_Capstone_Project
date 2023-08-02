@@ -47,7 +47,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                 sh 'cd /var/lib/jenkins/workspace/capstone-project && docker build -d -p ${DOCKER_IMAGE} .'
+                 sh 'cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p manidevops21/addressbook-webapp '
             }
         }
      }
