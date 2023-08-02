@@ -40,22 +40,16 @@ pipeline {
         }
       }
     }
-    stage('Update Deployment File') {
+    stage('Deploy to test') {
         environment {
-            GIT_REPO_NAME = "Edureka_Capstone_Project"
-            GIT_USER_NAME = "ManiDevops21"
+            DOCKER_IMAGE = "manidevops21/addressbook-webapp:${BUILD_NUMBER}"
+            REGISTRY_CREDENTIALS = credentials('docker-cred')
         }
         steps {
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                    git config user.email "maniskr14@gmail.com"
-                    git config user.name "ManiDevops21"
-                    BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Edureka_Capstone_Project/deployment.yml
-                    git add Edureka_Capstone_Project/deployment.yml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                '''
+          script {
+               docker pull manidevops21/addressbook-webapp:38
+               sh 'cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p  manidevops21/addressbook-webapp'
+               
             }
         }
     }
