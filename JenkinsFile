@@ -28,7 +28,7 @@ pipeline {
       environment {
         DOCKER_IMAGE = "manidevops21/addressbook-webapp:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "cd /var/lib/jenkins/workspace/capstone-project /Dockerfile"
-      
+      REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
         script {
