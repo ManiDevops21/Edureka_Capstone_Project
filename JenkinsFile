@@ -46,12 +46,12 @@ pipeline {
                REGISTRY_CREDENTIALS = credentials('docker-cred')
         }
         steps {
-            {
+            
                 sh '''
                 'docker pull manidevops21/addressbook-webapp:tagname'
                 'docker run -d -p  manidevops21/addressbook-webapp' 
                 '''
-            }
+            
         }
     }
   }
