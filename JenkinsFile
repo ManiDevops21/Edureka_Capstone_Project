@@ -48,7 +48,7 @@ pipeline {
         steps {
             
                 sh '''
-                'docker pull manidevops21/addressbook-webapp:tagname'
+                'docker pull manidevops21/addressbook-webapp:latest'
                 'docker run -d -p  manidevops21/addressbook-webapp' 
                 '''
             
