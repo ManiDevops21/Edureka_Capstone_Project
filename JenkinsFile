@@ -46,9 +46,10 @@ pipeline {
             REGISTRY_CREDENTIALS = credentials('docker-cred')
         }
         steps {
-          script {
-               docker pull manidevops21/addressbook-webapp:38
-               sh 'cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p  manidevops21/addressbook-webapp'
+                        docker pull manidevops21/addressbook-webapp:38
+            }
+    script {            
+        sh 'cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p  manidevops21/addressbook-webapp'
                
             }
         }
