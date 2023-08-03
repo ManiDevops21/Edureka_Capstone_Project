@@ -45,11 +45,9 @@ pipeline {
                 script {
                     drun = "docker run -p 5000:5000 ${DOCKER_IMAGE}"
                     println "${drun}"
-                    sshagent(['docker-test']) {
-                       sh 'make publish'
-            }
+           }
         }
      }
    }
  }
-}
+
