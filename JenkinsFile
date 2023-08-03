@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://107.23.2.183:9000"
+        SONAR_URL = "http://18.206.247.196:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -49,12 +49,12 @@ pipeline {
                     def drun = "docker run -d --name ${JOB_NAME} -p 5000:5000 ${DOCKER_IMAGE}"
                     println "${drun}"
                     sshagent(['docker-test']) {
-                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no docker@107.23.2.183 ${stopcontainer} "
-                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no docker@107.23.2.183 ${delcontName}"
-                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no docker@107.23.2.183 ${delimages}"
+                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no docker@18.206.247.196 ${stopcontainer} "
+                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no docker@18.206.247.196 ${delcontName}"
+                        sh returnStatus: true, script: "ssh -o StrictHostKeyChecking=no docker@18.206.247.196 ${delimages}"
 
                     // some block
-                        sh "ssh -o StrictHostKeyChecking=no docker@107.23.2.183 ${drun}"
+                        sh "ssh -o StrictHostKeyChecking=no docker@18.206.247.196 ${drun}"
             }
         }
      }
