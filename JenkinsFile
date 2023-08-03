@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     'docker pull  manidevops21/addressbook-webapp'
-                    'docker run -d -p 5000:5000 manidevops21/addressbook-webapp'
+                    'sh /var/lib/jenkins/workspace/capstone-project && docker run -d -p 8000:8000 manidevops21/addressbook-webapp'
            }
         }
      }
