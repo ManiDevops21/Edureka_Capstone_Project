@@ -43,7 +43,7 @@ pipeline {
    stage('Deploy to Test Server') {
             steps {
                 script {
-                    'docker pull abhishekf5/simple-python-flask-app'
+                    'docker pull  manidevops21/addressbook-webapp'
                     'docker run -d -p 5000:5000 manidevops21/addressbook-webapp'
            }
         }
