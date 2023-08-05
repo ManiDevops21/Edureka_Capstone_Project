@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     sh'docker pull  manidevops21/addressbook-webapp'
-                    sh 'cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p 8000:8000 manidevops21/addressbook-webapp'
+                    sh "cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p 8000:8000 manidevops21/addressbook-webapp:${BUILD_NUMBER}"
            }
         }
      }
