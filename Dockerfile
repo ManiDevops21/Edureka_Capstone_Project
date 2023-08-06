@@ -1,11 +1,13 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-WORKDIR /app
+# Refer to Maven build -> finalName
+ARG JAR_FILE=target/addressbook.jar
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
+# cd /opt/app
+WORKDIR /opt/app
 
-COPY src ./src
+# cp target/websocket.jar /opt/app/app.jar
+COPY ${JAR_FILE} app.jar
 
-CMD ["./mvnw", "addressbook:run"]
+# java -jar /opt/app/app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
