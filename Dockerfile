@@ -1,13 +1,11 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-# Simply the artifact path
-ARG artifact=target/addressbook.war
+WORKDIR /app
 
-WORKDIR /opt/app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
 
-COPY ${artifact} app.war
+COPY src ./src
 
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.war"]
+CMD ["./mvnw", "addressbook:run"]
