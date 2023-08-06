@@ -1,13 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
-
-# Refer to Maven build -> finalName
-ARG JAR_FILE=target/addressbook.jar
-
-# cd /opt/app
-WORKDIR /opt/app
-
-# cp target/websocket.jar /opt/app/app.jar
-COPY ${JAR_FILE} app.jar
-
-# java -jar /opt/app/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+FROM jetty:9-jre8-openjdk
+COPY target/addressbook.war /var/lib/jetty/webapps
+EXPOSE 8080
+CMD java -jar "$JETTY_HOME/start.jar"
