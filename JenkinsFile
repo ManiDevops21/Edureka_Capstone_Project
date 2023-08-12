@@ -34,7 +34,7 @@ pipeline {
         script {
             sh 'cd /var/lib/jenkins/workspace/Capstone-CICD && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://login.docker.com/u/login/', "dockerhub") {
+            docker.withRegistry('docker login --username xxx --password yyy', "dockerhub") {
                 dockerImage.push()
             }
         }
