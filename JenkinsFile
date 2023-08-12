@@ -9,10 +9,9 @@ pipeline {
     }
     stage('Build and Test') {
       steps {
-       git url: 'https://github.com/ManiDevops21/Edureka_Capstone_Project'
-    withMaven {
-      sh "mvn clean verify"
-         } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
+        sh 'ls -ltr'
+        // build the project and create a JAR file
+        sh 'mvn clean package'
        }
     }
     stage('Static Code Analysis') {
