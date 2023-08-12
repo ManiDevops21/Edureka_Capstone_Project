@@ -20,19 +20,19 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd /var/lib/jenkins/workspace/ && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'cd /var/lib/jenkins/workspace/Capstone-CICD && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
     }
     stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "manidevops21/addressbook-webapp:${BUILD_NUMBER}"
-        // DOCKERFILE_LOCATION = "cd /var/lib/jenkins/workspace/capstone-project /Dockerfile"
+        // DOCKERFILE_LOCATION = "cd /var/lib/jenkins/workspace/Capstone-CICD /Dockerfile"
       REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
         script {
-            sh 'cd /var/lib/jenkins/workspace/capstone-project && docker build -t ${DOCKER_IMAGE} .'
+            sh 'cd /var/lib/jenkins/workspace/Capstone-CICD && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
                 dockerImage.push()
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     sh "docker pull  manidevops21/addressbook-webapp:${BUILD_NUMBER}"
-                    sh "cd /var/lib/jenkins/workspace/capstone-project && docker run -d -p 8000:8080 manidevops21/addressbook-webapp:${BUILD_NUMBER}"
+                    sh "cd /var/lib/jenkins/workspace/Capstone-CICD && docker run -d -p 8000:8080 manidevops21/addressbook-webapp:${BUILD_NUMBER}"
            }
         }
      }
